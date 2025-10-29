@@ -8,7 +8,14 @@ function App() {
     <div>
       <h1>To Do List</h1>
       <p>Number of tasks with length method {tasks.length}</p>
-      Current input text: {newTaskText}
+      <p> Current input text: {newTaskText}</p>
+      <input
+        type="text"
+        placeholder="What needs to be done?"
+        value={newTaskText}
+        onChange={(event) => setNewTaskText(event.target.value)}
+      />
+      <button>Add Task</button>
     </div>
   );
 }

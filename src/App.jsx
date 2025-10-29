@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -32,6 +33,10 @@ function App() {
         onChange={(event) => setNewTaskText(event.target.value)}
       />
       <button onClick={handleAddTask}>Add Task</button>
+
+      {tasks.map((task) => (
+        <li key={task.id}>{task.text}</li>
+      ))}
     </div>
   );
 }

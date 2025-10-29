@@ -4,6 +4,22 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState("");
 
+  const handleAddTask = () => {
+    if (newTaskText === "") {
+      return;
+    }
+
+    const newId = Date.now();
+    const newTask = {
+      id: newId,
+      text: newTaskText,
+      inComplete: false,
+    };
+
+    setTasks([...tasks, newTask]);
+    setNewTaskText("");
+  };
+
   return (
     <div>
       <h1>To Do List</h1>
@@ -15,7 +31,7 @@ function App() {
         value={newTaskText}
         onChange={(event) => setNewTaskText(event.target.value)}
       />
-      <button>Add Task</button>
+      <button onClick={handleAddTask}>Add Task</button>
     </div>
   );
 }

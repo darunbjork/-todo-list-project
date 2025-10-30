@@ -14,7 +14,7 @@ function App() {
     const newTask = {
       id: newId,
       text: newTaskText,
-      inComplete: false,
+      isComplete: false, // Fixed typo: changed inComplete to isComplete
     };
 
     setTasks([...tasks, newTask]);
@@ -29,6 +29,11 @@ function App() {
       return task;
     });
     setTasks(updatedTasks);
+  };
+
+  const handleDeleteTask = (idToDelete) => {
+    const filteredTasks = tasks.filter((task) => task.id !== idToDelete);
+    setTasks(filteredTasks);
   };
 
   return (
@@ -47,7 +52,6 @@ function App() {
       {tasks.map((task) => (
         <li
           key={task.id}
-          onClick={() => handleToggleComplete(task.id)}
           style={{
             border: "1px solid #eee",
             padding: "10px",
@@ -56,9 +60,25 @@ function App() {
             cursor: "pointer",
             textDecoration: task.isComplete ? "line-through" : "none",
             opacity: task.isComplete ? 0.5 : 1,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {task.text}
+          <span onClick={() => handleToggleComplete(task.id)}>{task.text}</span>
+          <button
+            onClick={() => handleDeleteTask(task.id)}
+            style={{
+              background: "#ff4444",
+              color: "white",
+              border: "none",
+              padding: "5px 10px",
+              borderRadius: "3px",
+              cursor: "pointer",
+            }}
+          >
+            Delete
+          </button>
         </li>
       ))}
     </div>
